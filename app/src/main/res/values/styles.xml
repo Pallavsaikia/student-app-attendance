@@ -1,11 +1,71 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="NoActionBar" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--______________________text_________________________________-->
+
+    <!--bold-->
+    <style name="text_xxlarge_color_primary_black_bold" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_xxlarge</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+    <style name="text_xxlarge_color_primary_bold" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_xxlarge</item>
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <!--semibold-->
+    <style name="text_large_color_text_primary_semi_bold" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/textPrimary</item>
+    </style>
+
+
+    <!--light text-->
+
+    <style name="text_small_color_text_secondary_light" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/textSecondary</item>
+    </style>
+
+    <!--edit text-->
+    <style name="edit_text_cplight_bg_padding_medium" parent="Theme.AppCompat.Light">
+        <item name="android:fontFamily">@font/montserrat_light</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textColorHint">@color/dividerColor</item>
+        <item name="android:padding">@dimen/margin_padding_size_medium</item>
+        <item name="android:background">@drawable/bg_border_cplight</item>
+    </style>
+
+    <!--__________________________________buttons____________________________________-->
+
+    <style name="button_text_micro_color_accent" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/bg_button_round_small_color_accent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/margin_padding_size_medium</item>
+        <item name="android:textAllCaps">true</item>
+
     </style>
 
 </resources>

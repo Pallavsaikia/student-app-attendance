@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#8BC34A</color>
+    <color name="colorPrimaryLight">#DCEDC8</color>
+    <color name="colorPrimaryDark">#689F38</color>
+    <color name="colorAccent">#4CAF50</color>
+
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+    <color name="dividerColor">#BDBDBD</color>
+    <color name="colorBackgroundGray">#f7f7f7</color>
+    <color name="colorWhite">#ffffff</color>
+
+
+
+    <color name="colorRed">#ff2d2d</color>
+    <color name="colorCyne">#66e1c0</color>
+    <color name="colorBlue">#407af7</color>
+    <color name="colorGreen">#6dd65d</color>
+    <color name="colorGreenDark">#46a438</color>
+    <!--<color name="textPrimary">#263238</color>-->
+
+
+    <color name="rippleColor">#30000000</color>
+    <color name="rippleColorWhiteBackground">#10000000</color>
+    <color name="rippleColorDark">#30000000</color>
+
 </resources>
