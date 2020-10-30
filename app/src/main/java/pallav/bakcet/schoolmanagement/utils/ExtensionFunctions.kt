@@ -141,7 +141,7 @@ fun ApiResponse.apiCallHasNoError(activity: FragmentActivity): Boolean {
                     obj.getInt("error_code").toString()+" Error"
                 }
             } else {
-                obj.getString("error_message").toString()+" error"
+                obj.getString("error_message").toString()
 
             }
             if (!msgType.hasInternalServerError(activity, msg)) {
