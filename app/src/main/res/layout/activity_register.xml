@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".views.activities.LoginActivity">
+    tools:context=".views.activities.RegisterActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLeft"
@@ -36,12 +36,22 @@
             style="@style/text_xxlarge_color_primary_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/login"
+            android:text="@string/sign_up"
             android:textAllCaps="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/emailEditTxt"
+            style="@style/edit_text_cplight_bg_padding_medium"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_large"
+            android:hint="@string/email" />
 
         <EditText
             android:id="@+id/usernameEditTxt"
@@ -50,8 +60,18 @@
             android:maxLines="1"
             android:inputType="text"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding_size_large"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
             android:hint="@string/username" />
+
+        <EditText
+            android:id="@+id/yearEditTxt"
+            style="@style/edit_text_cplight_bg_padding_medium"
+            android:layout_width="match_parent"
+            android:maxLines="1"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:hint="@string/year" />
 
         <EditText
             android:id="@+id/passwordEditTxt"
@@ -63,16 +83,27 @@
             android:hint="@string/password"
             android:inputType="textPassword" />
 
+
+        <EditText
+            android:id="@+id/confirmPasswordEditTxt"
+            style="@style/edit_text_cplight_bg_padding_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword" />
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/loginBtn"
+            android:id="@+id/registerBtn"
             style="@style/button_text_micro_color_accent"
             android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_size_medium"
-            android:text="@string/log_in" />
+            android:text="@string/sign_up" />
         <TextView
-            android:id="@+id/registerTxtView"
+            android:id="@+id/loginTxtView"
             style="@style/text_small_color_accent_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +111,7 @@
             android:clickable="true"
             android:focusable="true"
             android:layout_marginTop="@dimen/margin_padding_size_medium"
-            android:text="@string/first_time_register_here"
+            android:text="@string/already_registered_login_here"
             />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

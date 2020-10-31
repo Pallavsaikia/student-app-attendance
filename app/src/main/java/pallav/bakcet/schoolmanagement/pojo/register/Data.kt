@@ -1,4 +1,4 @@
-package pallav.bakcet.schoolmanagement.pojo
+package pallav.bakcet.schoolmanagement.pojo.register
 
 
 import com.google.gson.annotations.SerializedName

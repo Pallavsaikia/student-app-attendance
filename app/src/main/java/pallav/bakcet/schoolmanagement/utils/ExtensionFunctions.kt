@@ -1,14 +1,20 @@
 package pallav.bakcet.schoolmanagement.utils
 
+import android.annotation.TargetApi
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.loading.view.*
@@ -51,6 +57,14 @@ fun Activity.showProgressDialog(
     view.descriptionDialog.text = description
     progress.show()
     return progress
+}
+
+/**
+ * Textview
+ */
+
+fun TextView.underLine() {
+    this.paintFlags = this.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 }
 
 /**
@@ -132,6 +146,7 @@ fun ApiResponse.apiCallHasNoError(activity: FragmentActivity): Boolean {
 //        val any= castObject(type,this.type!!)
         val gson = Gson()
         val obj = JSONObject(gson.toJson(this.data!!))
+        Log.d("asda",obj.toString())
         try {
             val msgType = obj.getBoolean("success")
             val msg: String = if (obj.getString("error_message") == JSONObject.NULL) {
@@ -176,6 +191,19 @@ fun ApiResponse.hasNoServerOrInternalError(activity: FragmentActivity): Boolean 
 /**
  * Fragment Activity
  */
+
+//taskBarColor
+@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+fun FragmentActivity.setStatusBarBackground(background: Int = R.color.colorWhite) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        val window: Window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent)
+//        window.navigationBarColor = ContextCompat.getColor(this,android.R.color.transparent)
+        window.setBackgroundDrawable(ContextCompat.getDrawable(this, background))
+    }
+}
+
 //checks network availability
 private fun FragmentActivity.isNetworkAvailable(): Boolean {
     val cm = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

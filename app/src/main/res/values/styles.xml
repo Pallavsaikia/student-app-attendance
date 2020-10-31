@@ -37,6 +37,12 @@
         <item name="android:textColor">@color/textPrimary</item>
     </style>
 
+    <!--medium-->
+    <style name="text_small_color_accent_medium" parent="Theme.AppCompat.Light">
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
 
     <!--light text-->
 

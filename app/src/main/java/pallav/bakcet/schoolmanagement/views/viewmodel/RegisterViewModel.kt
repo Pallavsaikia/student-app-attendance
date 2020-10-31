@@ -1,6 +1,7 @@
 package pallav.bakcet.schoolmanagement.views.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,22 +11,29 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import pallav.bakcet.schoolmanagement.network.ApiInterface
 import pallav.bakcet.schoolmanagement.network.ApiResponse
-import pallav.bakcet.schoolmanagement.pojo.login.LoginResponse
+import pallav.bakcet.schoolmanagement.pojo.register.RegisterResponse
 import pallav.bakcet.schoolmanagement.utils.GlobalPref
 import pallav.bakcet.schoolmanagement.utils.token
 
-class LoginViewModel(val context: Context, val apiService: ApiInterface) : ViewModel() {
+class RegisterViewModel(val context: Context, val apiService: ApiInterface) : ViewModel() {
     private val disposible = CompositeDisposable()
 
-    fun login(username: String, password: String): LiveData<ApiResponse> {
+    fun register(
+        username: String,
+        email: String,
+        year: Int,
+        password: String
+    ): LiveData<ApiResponse> {
         val mld = MutableLiveData<ApiResponse>()
         disposible.add(
-            apiService.login(username, password)
+            apiService.register(username, email, year, password)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object : DisposableSingleObserver<LoginResponse>() {
-                    override fun onSuccess(t: LoginResponse) {
+                .subscribeWith(object : DisposableSingleObserver<RegisterResponse>() {
+                    override fun onSuccess(t: RegisterResponse) {
+                        Log.d("addd",t.toString())
                         if (t.success) {
+
                             context.token(t.data!!.token)
                             GlobalPref(context).loggedIn(true)
                         }

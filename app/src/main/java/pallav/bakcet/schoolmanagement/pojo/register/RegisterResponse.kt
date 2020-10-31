@@ -1,9 +1,9 @@
-package pallav.bakcet.schoolmanagement.pojo
+package pallav.bakcet.schoolmanagement.pojo.register
 
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
+data class RegisterResponse(
     @SerializedName("data")
     val `data`: Data?,
     @SerializedName("error")
