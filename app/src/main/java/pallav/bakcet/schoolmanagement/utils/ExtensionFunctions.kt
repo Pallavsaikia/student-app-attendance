@@ -18,12 +18,18 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.loading.view.*
+import kotlinx.android.synthetic.main.session_expired_dialog.view.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import pallav.bakcet.schoolmanagement.BuildConfig
 import pallav.bakcet.schoolmanagement.R
 import pallav.bakcet.schoolmanagement.network.ApiResponse
+import pallav.bakcet.schoolmanagement.utils.AppConstants.INVALID_TOKEN
+import pallav.bakcet.schoolmanagement.utils.AppConstants.LOGOUT
+import pallav.bakcet.schoolmanagement.utils.AppConstants.SESSION_OVER
 import pallav.bakcet.schoolmanagement.views.activities.ErrorActivity
+import pallav.bakcet.schoolmanagement.views.activities.LoginActivity
 
 
 val ERROR_ACTIVITY = 3333
@@ -33,6 +39,10 @@ val ERROR_ACTIVITY = 3333
  */
 fun Context.token(): String {
     return GlobalPref(this).token() ?: "No Token"
+}
+
+fun Context.logout() {
+    GlobalPref(this).clearPref()
 }
 
 fun Context.token(string: String) {
@@ -132,6 +142,35 @@ fun String.isStringEmpty(): Boolean {
     return this.isEmpty() || this.replace(" ", "") == ""
 }
 
+/**
+ * integer
+ */
+
+fun Int?.checkAuthenticated(fragmentActivity: FragmentActivity) {
+    if (this != null) {
+        when (this) {
+            SESSION_OVER, LOGOUT , INVALID_TOKEN-> {
+                val builder = AlertDialog.Builder(fragmentActivity)
+                val view =
+                    fragmentActivity.layoutInflater.inflate(R.layout.session_expired_dialog, null)
+                builder.setView(view)
+                builder.setCancelable(false)
+
+                val progress = builder.create()
+                view.okaySession.setOnClickListener {
+                    fragmentActivity.logout()
+                    fragmentActivity.startActivity<LoginActivity>()
+                    fragmentActivity.finishAffinity()
+                    progress.dismiss()
+                }
+                progress.show()
+
+            }
+        }
+
+    }
+}
+
 
 /**
  * api response
@@ -146,24 +185,30 @@ fun ApiResponse.apiCallHasNoError(activity: FragmentActivity): Boolean {
 //        val any= castObject(type,this.type!!)
         val gson = Gson()
         val obj = JSONObject(gson.toJson(this.data!!))
-        Log.d("asda",obj.toString())
+        Log.d("asda", obj.toString())
         try {
             val msgType = obj.getBoolean("success")
+            val errorCode = obj.getInt("error_code")
             val msg: String = if (obj.getString("error_message") == JSONObject.NULL) {
                 if (msgType) {
                     "success"
                 } else {
-                    obj.getInt("error_code").toString()+" Error"
+                    obj.getInt("error_code").toString() + " Error"
                 }
             } else {
                 obj.getString("error_message").toString()
 
             }
-            if (!msgType.hasInternalServerError(activity, msg)) {
+
+            if (!msgType) {
+                errorCode.checkAuthenticated(activity)
                 noError = false
+                msgType.hasInternalServerError(activity, msg)
+
             }
+
         } catch (e: Exception) {
-            Log.d("ASda",e.toString())
+            Log.d("ASda", e.toString())
             this.hasNoServerOrInternalError(activity)
         }
     } else {
@@ -222,7 +267,8 @@ private fun FragmentActivity.isNetworkAvailable(): Boolean {
             val nc = cm.getNetworkCapabilities(n)
             return if (nc != null) {
                 nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(
-                    NetworkCapabilities.TRANSPORT_WIFI)
+                    NetworkCapabilities.TRANSPORT_WIFI
+                )
             } else {
                 true
             }
@@ -239,7 +285,7 @@ fun FragmentActivity.onError(error: String? = null) {
         val intent = Intent(this, ErrorActivity::class.java)
         intent.putExtra("isNetWorkError", true)
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-        this.startActivityForResult(intent,  ERROR_ACTIVITY)
+        this.startActivityForResult(intent, ERROR_ACTIVITY)
     } else {
         val intent = Intent(this, ErrorActivity::class.java)
         intent.putExtra("isNetWorkError", false)

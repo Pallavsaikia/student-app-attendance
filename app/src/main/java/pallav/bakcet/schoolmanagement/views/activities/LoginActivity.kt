@@ -9,6 +9,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 import pallav.bakcet.schoolmanagement.R
+import pallav.bakcet.schoolmanagement.pojo.login.LoginResponse
+import pallav.bakcet.schoolmanagement.pojo.register.RegisterResponse
 import pallav.bakcet.schoolmanagement.utils.*
 import pallav.bakcet.schoolmanagement.views.viewmodel.LoginViewModel
 
@@ -18,6 +20,10 @@ class LoginActivity : AppCompatActivity() {
     private val loginViewModel: LoginViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if(GlobalPref(this).loggedIn()){
+            startActivity<HomeActivity>()
+            finishAffinity()
+        }
         setContentView(R.layout.activity_main)
         registerTxtView.underLine()
         setStatusBarBackground()
@@ -38,7 +44,10 @@ class LoginActivity : AppCompatActivity() {
                             progress?.cancel()
 
                             if(it.apiCallHasNoError(this)) {
-
+                                val data=it.data as LoginResponse
+                                if(data.success) {
+                                    startActivity<HomeActivity>()
+                                }
                             }
                         })
             }

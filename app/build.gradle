@@ -98,4 +98,8 @@ dependencies {
 
     api 'com.droidninja:filepicker:2.2.4'
 
+    //scanner
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0@aar'
+    implementation 'com.google.zxing:core:3.3.3'
+
 }

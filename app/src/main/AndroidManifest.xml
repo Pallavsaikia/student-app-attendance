@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pallav.bakcet.schoolmanagement">
-
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -14,9 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".views.activities.RegisterActivity"></activity>
+        <activity android:name=".views.activities.HomeActivity"></activity>
+        <activity android:name=".views.activities.RegisterActivity" />
         <activity android:name=".views.activities.ErrorActivity" />
         <activity android:name=".views.activities.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

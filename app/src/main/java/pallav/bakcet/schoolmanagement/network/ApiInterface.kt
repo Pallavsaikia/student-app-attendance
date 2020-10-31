@@ -2,6 +2,7 @@ package pallav.bakcet.schoolmanagement.network
 
 import io.reactivex.Single
 import pallav.bakcet.schoolmanagement.pojo.login.LoginResponse
+import pallav.bakcet.schoolmanagement.pojo.mark_attendance.MarkAttendanceResponse
 import pallav.bakcet.schoolmanagement.pojo.register.RegisterResponse
 import retrofit2.http.*
 
@@ -24,6 +25,13 @@ interface ApiInterface {
         @Field("year") year: Int,
         @Field("password") password: String
     ): Single<RegisterResponse>
+
+
+    @FormUrlEncoded
+    @POST("mark-attendance/")
+    fun mark_attendance(
+        @Field("qr_code") qr_code: String
+    ): Single<MarkAttendanceResponse>
 
 
     /**

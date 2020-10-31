@@ -21,7 +21,7 @@ TokenRenewInterceptor(private val mContext: Context) : Interceptor, okhttp3.Inte
         val original=chain.request()
         val request=original.newBuilder()
                 .method(original.method(),original.body())
-                .addHeader("X-Access-Token",mContext.token())
+                .addHeader("Authorization",mContext.token())
 
 
 
@@ -51,7 +51,7 @@ TokenRenewInterceptor(private val mContext: Context) : Interceptor, okhttp3.Inte
         val original=chain.request()
         val request=original.newBuilder()
                 .method(original.method,original.body)
-                .addHeader("X-Access-Token",mContext.token())
+                .addHeader("Authorization",mContext.token())
 
 
 //        if(BuildConfig.API_DEBUG){

@@ -14,4 +14,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_registered_login_here">Already Registered? Login here</string>
+    <string name="session_expired">Session Expired</string>
+    <string name="please_login_again">Please login again</string>
+    <string name="okay">okay</string>
 </resources>

@@ -27,7 +27,12 @@ class LoginViewModel(val context: Context, val apiService: ApiInterface) : ViewM
                     override fun onSuccess(t: LoginResponse) {
                         if (t.success) {
                             context.token(t.data!!.token)
-                            GlobalPref(context).loggedIn(true)
+                            val globalPref=GlobalPref(context)
+                            globalPref.loggedIn(true)
+                            globalPref.username(t.data.username)
+                            globalPref.firstname(t.data.first_name)
+                            globalPref.lastname(t.data.last_name)
+                            globalPref.email(t.data.email)
                         }
                         mld.postValue(ApiResponse(t))
                     }
